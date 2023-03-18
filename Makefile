@@ -2,4 +2,4 @@ test:
 	echo "Hello World!"
 
 gendiff:
-	node bin/gendiff.js
+	node bin/gendiff.js -h
