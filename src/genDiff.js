@@ -38,18 +38,19 @@ const genDiff = (file1, file2) => {
 
     for (const i of temp) {
         if (_.get(i, "status") === "no change") {
-            result += `  ${i.keyName}:${_.get(i, "value")},\n`
+            result += `${i.keyName}:${_.get(i, "value")},\n`
         } else if (_.get(i, "status") === "changed") {
-            result += `  -${i.keyName}:${_.get(i, "value1")},\n  +${i.keyName}:${_.get(i, "value2")},\n`
+            result += `-${i.keyName}:${_.get(i, "value1")},\n+${i.keyName}:${_.get(i, "value2")},\n`
         } else if (_.get(i, "status") === "new") {
-            result += `  +${i.keyName}:${_.get(i, "value")},\n`
+            result += `+${i.keyName}:${_.get(i, "value")},\n`
         } else if (_.get(i, "status") === "deleted") {
-            result += `  -${i.keyName}:${_.get(i, "value")},\n`
+            result += `-${i.keyName}:${_.get(i, "value")},\n`
         }
     }
 
     return result + '}'
 }
 
+console.log(genDiff("file1.json", "file2.json"))
 
 export default genDiff

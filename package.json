@@ -5,7 +5,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "npx jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 11,
+    "allowImportExportEverywhere": true
   },
   "author": "",
   "license": "ISC",
