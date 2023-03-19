@@ -10,4 +10,5 @@ jobs:
         with:
           node-version: '14'
       - run: npm install -g jest
+      - run: npm install -g lodash
       - run: make test
