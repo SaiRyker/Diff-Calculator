@@ -51,6 +51,4 @@ const genDiff = (file1, file2) => {
     return result + '}'
 }
 
-console.log(genDiff("file1.json", "file2.json"))
-
 export default genDiff
