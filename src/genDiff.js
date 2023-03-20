@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import _ from 'lodash';
-import {cwd} from 'node:process';
 import {resolve, extname} from 'node:path';
 import parse from '../src/parsers.js' 
 
