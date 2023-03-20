@@ -1,3 +1,4 @@
+import { test, expect } from '@jest/globals';
 import genDiff from '../src/genDiff.js'
 
 const template = `{
