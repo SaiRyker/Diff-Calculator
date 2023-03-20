@@ -1,6 +1,7 @@
 import { Command } from 'commander';
 import * as process from 'node:process';
-import genDiff from '../src/genDiff';
+import genDiff from '../src/genDiff.js';
+
 const program = new Command();
 
 program
