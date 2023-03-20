@@ -8,8 +8,6 @@ extends:
   - plugin:import/errors
   - plugin:import/warnings
 overrides: []
-plugins:
-  - import
 parserOptions:
   ecmaVersion: latest
   sourceType: module
