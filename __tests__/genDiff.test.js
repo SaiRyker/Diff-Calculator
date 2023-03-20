@@ -12,4 +12,6 @@ host:hexlet.io,
 
 test("genDiff", () => {
     expect(genDiff("file1.json", "file2.json")).toBe(template)
+    expect(genDiff("file1.yml", "file2.yml")).toBe(template)
+    expect(genDiff("file1.yaml", "file2.yaml")).toBe(template)
 })

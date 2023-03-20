@@ -1,10 +1,13 @@
 import * as fs from 'fs';
 import _ from 'lodash';
 import {cwd} from 'node:process';
-import {resolve} from 'node:path';
+import {resolve, extname} from 'node:path';
+import parse from '../src/parsers.js' 
 
+const getExtension = (filePath) => extname(filePath).slice(1);
 
-const parse = (data) => JSON.parse(data);
+const getParsedData = (filePath) => parse(fs.readFileSync(resolve('__fixtures__', filePath)), getExtension(filePath))
+
 
 const makeStatus = (arr, file1Data, file2Data) => {
     const temp = arr.map((keyName) => {
@@ -40,11 +43,9 @@ const makeResult = (obj) => {
     return result + '}'
 }
 
-
-
 const genDiff = (file1, file2) => {
-    const file1Data = parse(fs.readFileSync(resolve(cwd(), file1)))
-    const file2Data = parse(fs.readFileSync(resolve(cwd(), file2)))
+    const file1Data = getParsedData(file1)
+    const file2Data = getParsedData(file2)
 
     const keys = _.sortBy(_.union(_.keys(file1Data), _.keys(file2Data)))
 
@@ -54,5 +55,6 @@ const genDiff = (file1, file2) => {
 
     return result
 }
+
 
 export default genDiff
