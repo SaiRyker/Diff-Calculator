@@ -16,23 +16,16 @@ const genDiff = (file1, file2) => {
     const keys = _.sortBy(_.union(_.keys(file1Data), _.keys(file2Data)))
 
     const temp = keys.map((keyName) => {
-
         if (_.has(file1Data, keyName) && _.has(file2Data, keyName)) {
-
             if (_.get(file1Data, keyName) === _.get(file2Data, keyName)) {
                 return {keyName, 'status': "no change", "value": _.get(file1Data, keyName)}
             } else {
                 return {keyName, 'status': "changed", "value1": _.get(file1Data, keyName), "value2": _.get(file2Data, keyName)}
             }
-
         } else if (!_.has(file1Data, keyName) && _.has(file2Data, keyName)) {
-
             return {keyName, 'status': "new", "value": _.get(file2Data, keyName)}
-
         } else if (_.has(file1Data, keyName) && !_.has(file2Data, keyName)) {
-
             return {keyName, 'status': "deleted", "value": _.get(file1Data, keyName)}
-
         }
     })
 
@@ -47,7 +40,6 @@ const genDiff = (file1, file2) => {
             result += `-${i.keyName}:${_.get(i, "value")},\n`
         }
     }
-
     return result + '}'
 }
 
