@@ -55,5 +55,6 @@ const genDiff = (file1, file2) => {
     return result
 }
 
+console.log(genDiff("file1.yml", "file2.yml"))
 
 export default genDiff
