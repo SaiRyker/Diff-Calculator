@@ -9,15 +9,34 @@ const getParsedData = (filePath) => parse(fs.readFileSync(resolve('__fixtures__'
 
 
 const makeStatus = (arr, file1Data, file2Data) => {
+    // const temp = arr.map((keyName) => {
+    //     if (_.has(file1Data, keyName) && _.has(file2Data, keyName)) {
+    //         if (_.get(file1Data, keyName) === _.get(file2Data, keyName)) {
+    //             return {keyName, 'status': "no change", "value": _.get(file1Data, keyName)}
+    //         } else {
+    //             return {keyName, 'status': "changed", "value1": _.get(file1Data, keyName), "value2": _.get(file2Data, keyName)}
+    //         }
+    //     } else if (!_.has(file1Data, keyName) && _.has(file2Data, keyName)) {
+    //         return {keyName, 'status': "new", "value": _.get(file2Data, keyName)}
+    //     } else if (_.has(file1Data, keyName) && !_.has(file2Data, keyName)) {
+    //         return {keyName, 'status': "deleted", "value": _.get(file1Data, keyName)}
+    //     }
+    // })
+
     const temp = arr.map((keyName) => {
         if (_.has(file1Data, keyName) && _.has(file2Data, keyName)) {
-            if (_.get(file1Data, keyName) === _.get(file2Data, keyName)) {
-                return {keyName, 'status': "no change", "value": _.get(file1Data, keyName)}
+            if (_.isObject(file1Data[`${keyName}`])) {
+                const newKeys = _.sortBy(_.union(_.keys(file1Data[`${keyName}`]), _.keys(file2Data[`${keyName}`])))
+                return makeStatus(newKeys, file1Data[`${keyName}`], file2Data[`${keyName}`])
             } else {
-                return {keyName, 'status': "changed", "value1": _.get(file1Data, keyName), "value2": _.get(file2Data, keyName)}
+                if (_.get(file1Data, keyName) === _.get(file2Data, keyName)) {
+                    return {keyName, 'status': "no change", "value": _.get(file1Data, keyName)}
+                } else {
+                    return {keyName, 'status': "changed", "value1": _.get(file1Data, keyName), "value2": _.get(file2Data, keyName)}
+                }
             }
         } else if (!_.has(file1Data, keyName) && _.has(file2Data, keyName)) {
-            return {keyName, 'status': "new", "value": _.get(file2Data, keyName)}
+            return {keyName, 'status': "new", "value": _.get(file2Data, keyName)}    
         } else if (_.has(file1Data, keyName) && !_.has(file2Data, keyName)) {
             return {keyName, 'status': "deleted", "value": _.get(file1Data, keyName)}
         }
@@ -45,14 +64,16 @@ const makeResult = (obj) => {
 const genDiff = (file1, file2) => {
     const file1Data = getParsedData(file1)
     const file2Data = getParsedData(file2)
-
+    //return _.isObject(file1Data.common)
     const keys = _.sortBy(_.union(_.keys(file1Data), _.keys(file2Data)))
 
     const temp = makeStatus(keys, file1Data, file2Data)
 
-    const result = makeResult(temp)
+    //const result = makeResult(temp)
 
-    return result
+    return temp[1][0]
 }
+
+console.log(genDiff("file1.json", "file2.json"))
 
 export default genDiff
