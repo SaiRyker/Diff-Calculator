@@ -11,5 +11,5 @@ jobs:
           node-version: '14'
       - run: npm install -g jest
       - run: npm install lodash --save
-      - run: npm install -g js-yaml
+      - run: npm install js-yaml --save
       - run: make test
