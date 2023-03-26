@@ -33,11 +33,11 @@ const childrenMap = (children, depth) => {
         else if (child.status === "no changed") {
            temp += `${spaceCounts}${child.key}:${stringify(_.get(child, "value"), depth+1)},\n`
        } else if (child.status === "changed") {
-           temp += `${spaceCounts}-${child.key}:${stringify(_.get(child, "oldValue",), depth+1)},\n${spaceCounts}+${child.key}:${stringify(_.get(child, "newValue"), depth+1)},\n`
+           temp += `${spaceCounts}- ${child.key}:${stringify(_.get(child, "oldValue",), depth+1)},\n${spaceCounts}+${child.key}:${stringify(_.get(child, "newValue"), depth+1)},\n`
        } else if (child.status === "new") {
-           temp += `${spaceCounts}+${child.key}:${stringify(_.get(child, "value"), depth+1)},\n`
+           temp += `${spaceCounts}+ ${child.key}:${stringify(_.get(child, "value"), depth+1)},\n`
        } else if (child.status === "deleted") {
-           temp += `${spaceCounts}-${child.key}:${stringify(_.get(child, "value"), depth+1)},\n`
+           temp += `${spaceCounts}- ${child.key}:${stringify(_.get(child, "value"), depth+1)},\n`
        }
    }
    return temp
@@ -53,17 +53,17 @@ const makeStylish = (array) => {
             result += childrenMap(item.children, 2)
         }
         else if (item.status === "deleted") {
-            result += ` -${item.key}: `
+            result += ` - ${item.key}: `
             result += _.concat(stringify(item.value, 2), '\n') 
         }
         else if (_.get(item, "status") === "new") {
-            result += ` +${item.key}: `
+            result += ` + ${item.key}: `
             result += stringify(item.value, 2)
         }
         
     }
 
-    return result
+    return result + '\n}'
 }
 
 export default makeStylish
