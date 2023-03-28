@@ -27,6 +27,5 @@ const genDiff = (file1, file2, formatName = 'stylish') => {
             return makeJson(temp)
     }
 }
-console.log(genDiff("file1.json", "file2.json", "json"))
 
 export default genDiff
