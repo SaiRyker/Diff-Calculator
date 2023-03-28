@@ -16,7 +16,10 @@ const stylish = fs.readFileSync(getFixturePath('stylishTemplate.txt'),'utf8');
 
 const plain = fs.readFileSync(getFixturePath('plainTemplate.txt'),'utf8');
 
+const json = fs.readFileSync(getFixturePath('jsonTemplate.txt'),'utf8');
+
 test("genDiff", () => {
     expect(genDiff(getFixturePath("file1.json"), getFixturePath("file2.json"), 'plain')).toBe(plain)
     expect(genDiff(getFixturePath("file1.json"), getFixturePath("file2.json"), 'stylish')).toBe(stylish)
+    expect(genDiff(getFixturePath("file1.json"), getFixturePath("file2.json"), 'json')).toBe(json)
 })

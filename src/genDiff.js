@@ -4,6 +4,7 @@ import parse from '../src/parsers.js'
 import makeStylish from './formatters/stylish.js';
 import makeStatus from './makeStatus.js';
 import makePlain from './formatters/plain.js';
+import makeJson from './formatters/json.js';
 
 const getExtension = (filePath) => extname(filePath).slice(1);
 
@@ -21,7 +22,11 @@ const genDiff = (file1, file2, formatName = 'stylish') => {
         
         case 'plain':
             return makePlain(temp)
+
+        case 'json':
+            return makeJson(temp)
     }
 }
+console.log(genDiff("file1.json", "file2.json", "json"))
 
 export default genDiff
