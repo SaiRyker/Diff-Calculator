@@ -12,12 +12,11 @@ const getFixturePath = (fileName) => {
   return fixturePath;
 };
 
-const expectedDataStylish = fs.readFileSync(
-  getFixturePath('output.txt'),
-  'utf8',
-);
+const stylish = fs.readFileSync(getFixturePath('stylishTemplate.txt'),'utf8');
+
+const plain = fs.readFileSync(getFixturePath('plainTemplate.txt'),'utf8');
 
 test("genDiff", () => {
-    expect(genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'))).toBe(expectedDataStylish)
-    expect(genDiff(getFixturePath('file1.yml'), getFixturePath('file2.yml'))).toBe(expectedDataStylish)
+    expect(genDiff(getFixturePath("file1.json"), getFixturePath("file2.json"), 'plain')).toBe(plain)
+    expect(genDiff(getFixturePath("file1.json"), getFixturePath("file2.json"), 'stylish')).toBe(stylish)
 })
