@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from 'lodash';
 
 const stringify = (val, depth) => {
     const spaceCounts = '  '.repeat(depth)
@@ -60,6 +60,7 @@ const makeStylish = (array) => {
             result += ` + ${item.key}: `
             result += stringify(item.value, 2)
         }
+        result+= '\n'
         
     }
 
