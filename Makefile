@@ -2,7 +2,7 @@ test:
 	echo "Hello World!"
 
 gendiff:
-	node bin/gendiff.js "file1.yml" "file2.yml"
+	node bin/gendiff.js --format plain "file1.json" "file2.json" 
 
 lint: 
 	npx eslint .
